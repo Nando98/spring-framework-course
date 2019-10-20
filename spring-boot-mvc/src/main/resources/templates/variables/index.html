@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title th:text="${titulo}"></title>
+</head>
+<body>
+	<h1 th:text="${titulo}"></h1>
+	
+	<ul>
+		<li>
+			<a th:href="@{/path/string/} + ${'Hola Fernando'}">/path/string/Hola Fernando</a>
+		</li>
+		<li>
+			<a th:href="@{/path/string/} + ${'Hola Andres'}">/path/string/Hola Andres</a>
+		</li>
+		<li>
+			<a th:href="@{/path/string/} + ${'Como estas'} + '/' + ${'8'}">/path/string/Como estas/8</a>
+		</li>
+	</ul>
+</body>
+</html>
