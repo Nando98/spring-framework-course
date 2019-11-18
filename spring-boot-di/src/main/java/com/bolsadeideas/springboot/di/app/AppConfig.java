@@ -30,7 +30,7 @@ public class AppConfig {
 		ItemFactura linea1 = new ItemFactura(producto1, 4);
 		ItemFactura linea2 = new ItemFactura(producto2, 2);
 		
-		return Arrays.asList(linea1, linea2);
+		return Arrays.asList(linea1, linea2); // Funciona de forma similiar al ArrayList a = new ArrayList | a.add()
 	}
 	
 	@Bean("itemsFacturaOficina")

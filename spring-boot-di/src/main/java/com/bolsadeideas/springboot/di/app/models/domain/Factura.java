@@ -1,14 +1,29 @@
 package com.bolsadeideas.springboot.di.app.models.domain;
 
+import java.io.Serializable;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+// import org.springframework.web.context.annotation.ApplicationScope;
+import org.springframework.web.context.annotation.RequestScope;
+// import org.springframework.web.context.annotation.SessionScope;
 
 @Component
-public class Factura {
+@RequestScope
+// @SessionScope
+// @ApplicationScope
+public class Factura implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6977968624593774146L;
 
 	@Value("${factura.descripcion}")
 	private String descripcion;
@@ -19,6 +34,18 @@ public class Factura {
 	@Autowired
 	@Qualifier("itemsFacturaOficina")
 	private List<ItemFactura> items;
+	
+	@PostConstruct
+	public void init() {
+		// Se ejecuta despuesde crearse el OBJ y hacer la DI
+		cliente.setNombre(cliente.getNombre().concat(" ").concat("Jose"));
+		descripcion = descripcion.concat(" del cliente: ").concat(cliente.getNombre());
+	}
+	
+	@PreDestroy
+	public void destroy() {
+		System.out.println("Factura destruida: ".concat(descripcion));
+	}
 
 	public String getDescripcion() {
 		return descripcion;
@@ -46,6 +73,6 @@ public class Factura {
 
 	@Override
 	public String toString() {
-		return "Factura [descripcion=" + descripcion + ", cliente=" + cliente + ", items=" + items + "]";
+		return "Factura [descripcion=" + descripcion + ", cliente=" + cliente.toString() + ", items=" + items.toString() + "]";
 	}
 }

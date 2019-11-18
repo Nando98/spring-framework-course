@@ -22,6 +22,8 @@ public class IndexController {
 		return "index";
 	}
 	
+	
+	// Utilizado en los proyectos de la Chakra, a través de constructores
 	//@Autowired
 	//public IndexController(IServicio servicio) {
 	//	super();

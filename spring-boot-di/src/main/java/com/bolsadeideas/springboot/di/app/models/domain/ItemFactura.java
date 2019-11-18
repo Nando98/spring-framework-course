@@ -30,4 +30,10 @@ public class ItemFactura {
 		return cantidad * producto.getPrecio();
 	}
 
+	@Override
+	public String toString() {
+		return "ItemFactura [producto=" + producto.toString() + ", cantidad=" + cantidad + "]";
+	}
+
+	
 }
