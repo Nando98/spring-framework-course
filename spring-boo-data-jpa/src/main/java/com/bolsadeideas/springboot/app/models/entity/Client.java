@@ -11,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "clients")
@@ -25,15 +30,27 @@ public class Client implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty
 	private String name;
 	
 	@Column(name = "last_name")
+	@NotEmpty
 	private String lastName;
+	
+	@NotEmpty
+	@Email
 	private String email;
 
+	@NotNull
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
+	
+	/*@PrePersist
+	public void prePersist() {
+		createAt = new Date();
+	}*/
 
 	public Long getId() {
 		return id;

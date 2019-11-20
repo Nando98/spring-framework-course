@@ -1,12 +1,19 @@
 package com.bolsadeideas.springboot.app.controllers;
 
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.bolsadeideas.springboot.app.models.dao.IClientDao;
+import com.bolsadeideas.springboot.app.models.entity.Client;
 
 @Controller
 @RequestMapping("/client")
@@ -21,4 +28,26 @@ public class ClientController {
 		model.addAttribute("clients", clientDao.findAll());
 		return "list";
 	}
+	
+	@GetMapping("/form")
+	public String createForm(Map<String, Object> model) {
+		Client client = new Client();
+		model.put("client", client);
+		model.put("title", "Client form");
+		
+		return "form";
+	}
+	
+	@PostMapping("/form")
+	public String saveClient(@Valid Client client, BindingResult result, Model model) {
+		
+		if (result.hasErrors()) {
+			model.addAttribute("title", "Client form");
+			
+			return "form";
+		}
+		clientDao.save(client);
+		return "redirect:list";
+	}
+	
 }
