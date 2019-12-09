@@ -34,8 +34,8 @@
 
 	<div class="container mt-5">
 		<h1 class="text-primary" th:text="${title}"></h1>
-		<a th:href="@{form}">Create a new client</a>
-		<table class="table table-striped">
+		<a th:href="@{form}" class="btn btn-success btn-xs">Create a new client</a>
+		<table class="table table-striped mt-3">
 			<thead>
 				<tr>
 					<th>ID</th>
@@ -43,6 +43,7 @@
 					<th>Last Name</th>
 					<th>Email</th>
 					<th>Date</th>
+					<th>Edit</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -52,6 +53,7 @@
 					<td th:text="${client.lastName}"></td>
 					<td th:text="${client.email}"></td>
 					<td th:text="${client.createAt}"></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{form/} + ${client.id}">Editar</a></td>
 				</tr>
 			</tbody>
 		</table>
